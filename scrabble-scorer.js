@@ -2,6 +2,7 @@
 
 const input = require("readline-sync");
 
+// Define the old Scrabble point structure
 const oldPointStructure = {
    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
    2: ['D', 'G'],
@@ -12,6 +13,8 @@ const oldPointStructure = {
    10: ['Q', 'Z']
 };
 
+
+// Function to score a word using the old Scrabble scoring system
 function oldScrabbleScorer(word) {
    word = word.toUpperCase();
    let letterPoints = "";
@@ -25,10 +28,12 @@ function oldScrabbleScorer(word) {
    return letterPoints;
 }
 
+// Function to transform the old point structure into a new structure
 function transform(oldPointStructure) {
    let newPointStructure = {};
    for (let keys in oldPointStructure) {
       let letters = oldPointStructure[keys];
+      //The loops continue until all letters associated with all point values have been processed.
       for (let i = 0; i < letters.length; i++) {
          let letter = letters[i];
          let lowercaseLetter = letter.toLowerCase();
@@ -39,6 +44,7 @@ function transform(oldPointStructure) {
    return newPointStructure;
 };
 
+// Create the new point structure using the transform function
 let newPointStructure = transform(oldPointStructure);
 
 // your job is to finish writing these functions and variables that we've named //
