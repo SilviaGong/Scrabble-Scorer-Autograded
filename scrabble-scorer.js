@@ -140,8 +140,13 @@ function scorerPrompt() {
       }
    }
    let selectedAlgorithm = scoringAlgorithms[selectedID];
-   console.log(`Score for '${word}': ${selectedAlgorithm.scorerFunction(word)}`);
-   return selectedAlgorithm;
+   let score = selectedAlgorithm.scorerFunction(word);
+   let resultObject = {
+      word: word,
+      score: score
+   };
+   console.log(`Score for '${resultObject.word}': ${resultObject.score}`);
+   return resultObject;
 }
 
 // console.log(newPointStructure);
