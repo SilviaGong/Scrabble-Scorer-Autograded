@@ -2,7 +2,6 @@
 
 const input = require("readline-sync");
 
-// Define the old Scrabble point structure
 const oldPointStructure = {
    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
    2: ['D', 'G'],
@@ -13,8 +12,6 @@ const oldPointStructure = {
    10: ['Q', 'Z']
 };
 
-
-// Function to score a word using the old Scrabble scoring system
 function oldScrabbleScorer(word) {
    word = word.toUpperCase();
    let letterPoints = "";
@@ -28,12 +25,10 @@ function oldScrabbleScorer(word) {
    return letterPoints;
 }
 
-// Function to transform the old point structure into a new structure
 function transform(oldPointStructure) {
    let newPointStructure = {};
    for (let keys in oldPointStructure) {
       let letters = oldPointStructure[keys];
-      //The loops continue until all letters associated with all point values have been processed.
       for (let i = 0; i < letters.length; i++) {
          let letter = letters[i];
          let lowercaseLetter = letter.toLowerCase();
@@ -44,7 +39,6 @@ function transform(oldPointStructure) {
    return newPointStructure;
 };
 
-// Create the new point structure using the transform function
 let newPointStructure = transform(oldPointStructure);
 
 // your job is to finish writing these functions and variables that we've named //
@@ -115,7 +109,7 @@ let scrabble = {
 
 let scoringAlgorithms = [simpleScore, BonusVowels, scrabble];
 
-function scorerPrompt() {
+/* function scorerPrompt() {
    let word = initialPrompt();
    let selectedIDs = input.question("Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter 0, 1, or 2: ");
    if (Number(selectedIDs) === 0) {
@@ -131,6 +125,23 @@ function scorerPrompt() {
       console.log("Invalid input. Please enter 0, 1, or 2.");
       selectedIDs = input.question("Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter 0, 1, or 2: ");
    }
+   return scoringAlgorithms[selectedIDs];
+} */
+
+function scorerPrompt() {
+   let word = initialPrompt();
+   let selectedID;
+   while (true) {
+      selectedID = input.question("Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses Scrabble point system\nEnter 0, 1, or 2: ");
+      if (Number(selectedID) === 0 || Number(selectedID) === 1 || Number(selectedID) === 2) {
+         break;
+      } else {
+         console.log("Invalid input. Please enter 0, 1, or 2.");
+      }
+   }
+   let selectedAlgorithm = scoringAlgorithms[selectedID];
+   console.log(`Score for '${word}': ${selectedAlgorithm.scorerFunction(word)}`);
+   return selectedAlgorithm;
 }
 
 // console.log(newPointStructure);
