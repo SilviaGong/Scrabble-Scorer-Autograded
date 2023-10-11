@@ -145,7 +145,6 @@ function scorerPrompt() {
       word: word,
       score: score
    };
-   console.log(`Score for '${resultObject.word}': ${resultObject.score}`);
    return resultObject;
 }
 
@@ -157,7 +156,8 @@ function scorerPrompt() {
 
 function runProgram() {
    // initialPrompt();
-   scorerPrompt();
+   let resultObject = scorerPrompt();
+   console.log(`Score for '${resultObject.word}': ${resultObject.score}`);
 }
 
 // Don't write any code below this line //
